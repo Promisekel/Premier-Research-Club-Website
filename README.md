@@ -1,13 +1,26 @@
-# Premier Research Club Website - Complete Guide
+# Premier Research Club Website
 
-Welcome to your new Premier Research Club website! This guide will help you understand, modify, and maintain your website effectively.
+A modern, responsive website for the Premier Research Club featuring glassmorphism design, smooth animations, and professional UI/UX.
 
-## 🚀 Getting Started
+## 🌐 Live Demo
+**Website URL:** [Coming Soon - Will be added after GitHub Pages deployment]
+
+## ✨ Features
+- Modern glassmorphism design
+- Responsive layout for all devices
+- Smooth scroll animations
+- Interactive particle background
+- Timeline section
+- Testimonials carousel
+- Contact form
+- Professional navigation with scroll effects
+
+## 🚀 Quick Start
 
 ### Prerequisites
 - **Visual Studio Code** (VS Code) - Download from https://code.visualstudio.com/
 - **Live Server Extension** for VS Code
-- Basic understanding of HTML, CSS, and JavaScript (this guide will help you learn!)
+- Git (for deployment)
 
 ### Setting Up Live Server
 1. Open VS Code
@@ -242,6 +255,44 @@ async submitContactForm(data) {
 1. Choose a hosting provider (Bluehost, SiteGround, etc.)
 2. Upload files via FTP
 3. Configure your domain
+
+## 🌐 Deployment
+
+### GitHub Pages (Recommended)
+1. **Create a GitHub Repository:**
+   - Go to [GitHub.com](https://github.com) and sign in
+   - Click "New Repository"
+   - Name it something like "premier-research-club" or "rpc-website"
+   - Make it public
+   - Don't initialize with README (we already have one)
+
+2. **Push to GitHub:**
+   ```bash
+   git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+   git branch -M main
+   git push -u origin main
+   ```
+
+3. **Enable GitHub Pages:**
+   - Go to your repository on GitHub
+   - Click "Settings" tab
+   - Scroll down to "Pages" in the left sidebar
+   - Under "Source", select "Deploy from a branch"
+   - Select "main" branch and "/ (root)" folder
+   - Click "Save"
+   - Your website will be available at: `https://YOUR_USERNAME.github.io/YOUR_REPO_NAME`
+
+### Alternative Deployment Options
+
+#### Netlify
+1. Go to [netlify.com](https://netlify.com)
+2. Drag and drop your project folder
+3. Get instant deployment with custom domain options
+
+#### Vercel
+1. Go to [vercel.com](https://vercel.com)
+2. Connect your GitHub repository
+3. Automatic deployments on every push
 
 ## 🔍 SEO and Performance Tips
 
