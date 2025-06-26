@@ -1,0 +1,11 @@
+/* Test CSS - Simple red background to verify CSS is loading */
+body {
+    background-color: red !important;
+    color: white !important;
+    font-family: Arial, sans-serif !important;
+}
+
+h1 {
+    color: yellow !important;
+    font-size: 50px !important;
+}
