@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premier Research Club - Advancing Knowledge Through Research</title>
+    <meta name="description" content="Join the Premier Research Club - A community dedicated to advancing knowledge through collaborative research projects.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading Premier Research Club...</div>
+    </div>
+
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <!-- Logo/Brand -->
+            <div class="nav-brand">
+                <img src="assets/logo.png" alt="Premier Research Club Logo" class="logo">
+                <span class="brand-text">Premier Research Club</span>
+            </div>
+            
+            <!-- Navigation Links -->
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#projects" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#join" class="nav-link">Join Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Toggle -->
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    Premier Research Club
+                    <span class="accent-text typing-text" id="typingText">Advancing Knowledge</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Empowering researchers and innovators to tackle real-world challenges through collaborative research projects in health, technology, and community development.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-gradient" onclick="scrollToSection('join')">
+                        <i class="fas fa-users"></i>
+                        Join Our Community
+                    </button>
+                    <button class="btn btn-secondary" onclick="scrollToSection('projects')">
+                        <i class="fas fa-microscope"></i>
+                        View Projects
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="assets/hero-research.jpg" alt="Research team collaborating" class="hero-img floating">
+            </div>
+        </div>
+        
+        <!-- Scroll Down Indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-arrow">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title reveal">About Our Mission</h2>
+                <p class="section-subtitle reveal">
+                    Fostering a collaborative environment where researchers can make meaningful contributions to society
+                </p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="mission-card glass reveal">
+                        <div class="mission-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>Our Mission</h3>
+                        <p>
+                            To create an inclusive research community that bridges the gap between academic research and practical solutions. We believe that collaborative research can drive positive change in our communities and beyond.
+                        </p>
+                    </div>
+                    
+                    <div class="mission-card glass reveal">
+                        <div class="mission-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3>Our Vision</h3>
+                        <p>
+                            To be the leading platform for interdisciplinary research collaboration, where diverse minds come together to address global challenges in health, technology, and social development.
+                        </p>
+                    </div>
+                    
+                    <div class="mission-card glass reveal">
+                        <div class="mission-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Our Values</h3>
+                        <p>
+                            Integrity, Innovation, Collaboration, and Impact. We are committed to conducting ethical research that creates meaningful change in the world.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="about-image reveal">
+                    <img src="assets/about-team.jpg" alt="Our research team" class="about-img floating">
+                    <div class="stats-overlay">
+                        <div class="stat-item">
+                            <span class="stat-number">150+</span>
+                            <span class="stat-label">Active Members</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">25+</span>
+                            <span class="stat-label">Completed Projects</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Research Areas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title reveal">Current Research Projects</h2>
+                <p class="section-subtitle reveal">
+                    Explore our ongoing research initiatives and submit your own projects
+                </p>
+            </div>
+            
+            <!-- Project Upload Form -->
+            <div class="upload-section glass reveal">
+                <h3><i class="fas fa-upload"></i> Submit Your Research Project</h3>
+                <form class="upload-form" id="projectUploadForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="projectTitle">Project Title *</label>
+                            <input type="text" id="projectTitle" name="projectTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="projectCategory">Category *</label>
+                            <select id="projectCategory" name="projectCategory" required>
+                                <option value="">Select Category</option>
+                                <option value="health">Public Health</option>
+                                <option value="technology">Technology</option>
+                                <option value="environment">Environment</option>
+                                <option value="education">Education</option>
+                                <option value="social">Social Sciences</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectDescription">Project Description *</label>
+                        <textarea id="projectDescription" name="projectDescription" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectFile">Upload Project File (PDF, DOC, etc.)</label>
+                        <input type="file" id="projectFile" name="projectFile" accept=".pdf,.doc,.docx,.txt">
+                        <div class="file-info">Maximum file size: 10MB</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-gradient">
+                        <i class="fas fa-paper-plane"></i>
+                        Submit Project
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Projects Grid -->
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Sample Project Cards (will be populated dynamically) -->
+                <div class="project-card glass reveal">
+                    <div class="project-image">
+                        <img src="assets/malaria-study.jpg" alt="Malaria Prevention Study">
+                        <div class="project-overlay">
+                            <span class="project-status active">Active</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Malaria Prevention in Rural Communities</h3>
+                        <p class="project-description">
+                            Developing and testing community-based intervention strategies to reduce malaria transmission in rural areas of Sub-Saharan Africa.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Public Health</span>
+                            <span class="tag">Community Intervention</span>
+                        </div>
+                        <div class="project-footer">
+                            <div class="project-team">
+                                <img src="assets/team-member-1.jpg" alt="Dr. Sarah Johnson">
+                                <span>Dr. Sarah Johnson</span>
+                            </div>
+                            <button class="btn-learn-more">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card glass reveal">
+                    <div class="project-image">
+                        <img src="assets/ai-healthcare.jpg" alt="AI in Healthcare">
+                        <div class="project-overlay">
+                            <span class="project-status active">Active</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">AI-Powered Diagnostic Tools</h3>
+                        <p class="project-description">
+                            Developing machine learning algorithms to improve early detection of diseases through medical imaging and diagnostic patterns.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Artificial Intelligence</span>
+                            <span class="tag">Medical Technology</span>
+                        </div>
+                        <div class="project-footer">
+                            <div class="project-team">
+                                <img src="assets/team-member-2.jpg" alt="Dr. Marcus Chen">
+                                <span>Dr. Marcus Chen</span>
+                            </div>
+                            <button class="btn-learn-more">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Us Section -->
+    <section class="join" id="join">
+        <div class="container">
+            <div class="join-content">
+                <div class="join-text reveal">
+                    <h2 class="section-title">Join Our Research Community</h2>
+                    <p class="section-subtitle">
+                        Be part of a dynamic community of researchers, innovators, and change-makers
+                    </p>
+                    
+                    <div class="benefits-list">
+                        <div class="benefit-item reveal">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Access to cutting-edge research opportunities</span>
+                        </div>
+                        <div class="benefit-item reveal">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Collaborate with experts across disciplines</span>
+                        </div>
+                        <div class="benefit-item reveal">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Professional development workshops</span>
+                        </div>
+                        <div class="benefit-item reveal">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Publication and presentation opportunities</span>
+                        </div>
+                    </div>
+                    
+                    <div class="join-buttons">
+                        <!-- Replace with your actual Google Form link -->
+                        <a href="https://forms.google.com/your-membership-form" class="btn btn-primary btn-gradient" target="_blank">
+                            <i class="fas fa-user-plus"></i>
+                            Apply for Membership
+                        </a>
+                        <button class="btn btn-secondary" onclick="scrollToSection('contact')">
+                            <i class="fas fa-info-circle"></i>
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="join-image reveal">
+                    <img src="assets/join-community.jpg" alt="Research community meeting" class="join-img floating">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title reveal">Get In Touch</h2>
+                <p class="section-subtitle reveal">
+                    Have questions or want to collaborate? We'd love to hear from you
+                </p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info reveal">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong>
+                            <p>info@premierresearchclub.org</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>Phone</strong>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Address</strong>
+                            <p>123 Research Drive<br>Innovation District, ST 12345</p>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <h4>Follow Us</h4>
+                        <div class="social-icons">
+                            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container glass reveal">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="contactName" name="name" required>
+                            <label for="contactName">Full Name *</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="contactEmail" name="email" required>
+                            <label for="contactEmail">Email Address *</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" id="contactSubject" name="subject">
+                            <label for="contactSubject">Subject</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea id="contactMessage" name="message" rows="5" required></textarea>
+                            <label for="contactMessage">Message *</label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-gradient">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                    </form>
+                    
+                    <!-- Success/Error Messages -->
+                    <div class="form-message" id="formMessage"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <img src="assets/logo.png" alt="Premier Research Club Logo" class="footer-logo">
+                        <h3>Premier Research Club</h3>
+                    </div>
+                    <p>Advancing knowledge through collaborative research and innovation.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#join">Join Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Research Areas</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Public Health</a></li>
+                        <li><a href="#">Technology</a></li>
+                        <li><a href="#">Environment</a></li>
+                        <li><a href="#">Education</a></li>
+                        <li><a href="#">Social Sciences</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Stay updated with our latest research and events</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Premier Research Club. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-storage.js"></script>
+    
+    <!-- Firebase Configuration -->
+    <script src="firebase.js"></script>
+    
+    <!-- Main JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

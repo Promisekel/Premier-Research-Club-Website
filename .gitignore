@@ -1,0 +1,62 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Firebase (since we're not using it for deployment)
+.firebase/
+firebase-debug.log
+firebase.json
+.firebaserc
+firestore.rules
+firestore.indexes.json
+storage.rules
+firebase.js
+
+# Build files
+dist/
+build/
+
+# Logs
+logs
+*.log
+
+# Temporary files
+.tmp/
+temp/
+
+# Backup files
+*.bak
+*.backup
+*.orig
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Snapshots
+.snapshots/
