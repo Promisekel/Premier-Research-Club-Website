@@ -11,8 +11,9 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-# IDE and editor files
-.vscode/
+# IDE and editor files (but keep .vscode/settings.json for Live Server)
+.vscode/launch.json
+.vscode/tasks.json
 .idea/
 *.swp
 *.swo
