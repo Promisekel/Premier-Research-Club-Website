@@ -606,7 +606,7 @@ window.addEventListener('error', function(e) {
  * Based on the Modified Poisson Regression results from the analysis
  */
 function createForestPlot() {
-    // Data from the analysis notebook - Crude and Adjusted RR with 95% CI
+    // Data from the analysis notebook - matching the exact labels from the forest plot image
     const variables = [
         'Symptoms (Good Knowledge)',
         'Screening Methods (Good Knowledge)', 
@@ -627,42 +627,43 @@ function createForestPlot() {
         'Institution (MIDWIFERY)'
     ];
 
-    // Crude RR data (from forest plot in notebook)
+    // Values extracted from the forest plot image - reading from bottom to top
     const crudeRR = [1.01, 1.12, 1.05, 1.07, 0.95, 0.89, 2.45, 1.03, 4.67, 0.98, 1.09, 1.34, 4.02, 1.89, 1.78, 1.15, 1.52];
     const crudeLower = [0.87, 0.94, 0.89, 0.91, 0.79, 0.75, 0.68, 0.88, 1.98, 0.84, 0.93, 1.14, 1.73, 0.81, 1.02, 0.78, 1.03];
     const crudeUpper = [1.17, 1.33, 1.24, 1.26, 1.14, 1.06, 8.84, 1.21, 11.02, 1.14, 1.28, 1.58, 9.33, 4.41, 3.11, 1.70, 2.24];
     
-    // Adjusted RR data (from forest plot in notebook)
+    // Adjusted values from the forest plot
     const adjustedRR = [0.99, 1.09, 1.04, 1.05, 0.93, 0.87, 2.89, 1.02, 3.45, 0.96, 1.07, 1.29, 3.78, 1.67, 1.65, 1.08, 1.42];
     const adjustedLower = [0.85, 0.91, 0.88, 0.89, 0.77, 0.73, 0.79, 0.87, 1.45, 0.82, 0.91, 1.09, 1.58, 0.71, 0.94, 0.73, 0.96];
     const adjustedUpper = [1.15, 1.30, 1.23, 1.24, 1.12, 1.04, 10.57, 1.20, 8.20, 1.12, 1.26, 1.52, 9.05, 3.93, 2.89, 1.60, 2.10];
 
-    // Significance indicators (p < 0.05)
-    const significantCrude = [false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false];
-    const significantAdjusted = [false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false];
-
-    const yValues = variables.map((_, i) => i);
+    // Create y-values with spacing between crude and adjusted
+    const yValuesCrude = variables.map((_, i) => i * 2); // Even numbers: 0, 2, 4, 6...
+    const yValuesAdjusted = variables.map((_, i) => i * 2 + 0.4); // Offset: 0.4, 2.4, 4.4, 6.4...
 
     // Crude RR trace
     const crudeTrace = {
         x: crudeRR,
-        y: yValues,
+        y: yValuesCrude,
         error_x: {
             type: 'data',
             symmetric: false,
             array: crudeUpper.map((u, i) => u - crudeRR[i]),
-            arrayminus: crudeRR.map((r, i) => r - crudeLower[i])
+            arrayminus: crudeRR.map((r, i) => r - crudeLower[i]),
+            color: '#ff7b39',
+            thickness: 3,
+            width: 4
         },
         mode: 'markers',
         type: 'scatter',
         name: 'Crude RR (95% CI)',
         marker: {
             color: '#ff7b39',
-            size: 10,
+            size: 8,
             symbol: 'circle',
             line: {
                 color: '#e55a1b',
-                width: 2
+                width: 1.5
             }
         },
         hovertemplate: '<b>%{text}</b><br>' +
@@ -673,26 +674,29 @@ function createForestPlot() {
         customdata: crudeRR.map((rr, i) => [crudeLower[i], crudeUpper[i]])
     };
 
-    // Adjusted RR trace  
+    // Adjusted RR trace with spacing  
     const adjustedTrace = {
         x: adjustedRR,
-        y: yValues.map(y => y + 0.1), // Slight offset for visibility
+        y: yValuesAdjusted,
         error_x: {
             type: 'data',
             symmetric: false,
             array: adjustedUpper.map((u, i) => u - adjustedRR[i]),
-            arrayminus: adjustedRR.map((r, i) => r - adjustedLower[i])
+            arrayminus: adjustedRR.map((r, i) => r - adjustedLower[i]),
+            color: '#11998e',
+            thickness: 3,
+            width: 4
         },
         mode: 'markers',
         type: 'scatter',
         name: 'Adjusted RR (95% CI)',
         marker: {
             color: '#11998e',
-            size: 10,
+            size: 8,
             symbol: 'diamond',
             line: {
                 color: '#0d7377',
-                width: 2
+                width: 1.5
             }
         },
         hovertemplate: '<b>%{text}</b><br>' +
@@ -707,13 +711,20 @@ function createForestPlot() {
         title: {
             text: 'Forest Plot: Crude and Adjusted Relative Risks for Screening Uptake',
             font: {
-                size: 16,
+                size: 18,
                 color: '#2c3e50',
                 family: 'Inter, sans-serif'
-            }
+            },
+            x: 0.5
         },
         xaxis: {
-            title: 'Relative Risk (RR)',
+            title: {
+                text: 'Relative Risk (RR)',
+                font: {
+                    size: 14,
+                    color: '#2c3e50'
+                }
+            },
             range: [0, 12],
             gridcolor: 'rgba(200,200,200,0.3)',
             showgrid: true,
@@ -728,20 +739,21 @@ function createForestPlot() {
         yaxis: {
             title: '',
             tickmode: 'array',
-            tickvals: yValues,
+            tickvals: yValuesCrude.map(y => y + 0.2), // Center between crude and adjusted
             ticktext: variables,
             showgrid: true,
             gridcolor: 'rgba(200,200,200,0.2)',
             font: {
                 size: 11,
                 color: '#2c3e50'
-            }
+            },
+            range: [-0.5, (variables.length - 1) * 2 + 1]
         },
         showlegend: true,
         legend: {
-            x: 0.7,
-            y: 1,
-            bgcolor: 'rgba(255,255,255,0.8)',
+            x: 0.65,
+            y: 0.95,
+            bgcolor: 'rgba(255,255,255,0.9)',
             bordercolor: 'rgba(0,0,0,0.1)',
             borderwidth: 1,
             font: {
@@ -750,9 +762,9 @@ function createForestPlot() {
             }
         },
         margin: {
-            l: 200,
+            l: 220,
             r: 100,
-            t: 80,
+            t: 100,
             b: 80
         },
         plot_bgcolor: 'rgba(248,249,250,0.5)',
@@ -764,9 +776,9 @@ function createForestPlot() {
                 x0: 1,
                 x1: 1,
                 y0: -0.5,
-                y1: variables.length - 0.5,
+                y1: (variables.length - 1) * 2 + 0.5,
                 line: {
-                    color: 'rgba(0,0,0,0.5)',
+                    color: 'rgba(0,0,0,0.6)',
                     width: 2,
                     dash: 'dash'
                 }
@@ -775,14 +787,15 @@ function createForestPlot() {
         annotations: [
             // Reference line annotation
             {
-                x: 1.1,
-                y: variables.length - 1,
-                text: 'No Effect (RR = 1)',
+                x: 1.2,
+                y: (variables.length - 1) * 2,
+                text: 'No Effect<br>(RR = 1)',
                 showarrow: false,
                 font: {
                     size: 10,
                     color: '#666'
-                }
+                },
+                align: 'left'
             }
         ]
     };
@@ -795,8 +808,8 @@ function createForestPlot() {
         toImageButtonOptions: {
             format: 'png',
             filename: 'forest_plot_relative_risks',
-            height: 600,
-            width: 1000,
+            height: 700,
+            width: 1200,
             scale: 2
         }
     };
