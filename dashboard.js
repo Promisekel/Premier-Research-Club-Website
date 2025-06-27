@@ -518,34 +518,91 @@ function createBarriersChart() {
 function createInstitutionChart() {
     const data = [
         {
-            x: ['University A', 'College B', 'Polytechnic C'],
-            y: [18.2, 12.5, 9.1],
+            x: ['UHAS', 'MIDWIFERY', 'TERESCO', 'FRANCO'],
+            y: [17.6, 15.6, 11.8, 8.1],
             type: 'bar',
             name: 'Screening Uptake Rate',
-            marker: { color: ['#27ae60', '#f39c12', '#e74c3c'] },
-            text: ['18.2%', '12.5%', '9.1%'],
-            textposition: 'outside'
+            marker: { color: ['#27ae60', '#3498db', '#f39c12', '#e74c3c'] },
+            text: ['17.6%', '15.6%', '11.8%', '8.1%'],
+            textposition: 'outside',
+            hovertemplate: '<b>%{x}</b><br>' +
+                          'Screening Uptake: %{y}%<br>' +
+                          '<extra></extra>'
         },
         {
-            x: ['University A', 'College B', 'Polytechnic C'],
-            y: [45.6, 38.2, 35.4],
+            x: ['UHAS', 'MIDWIFERY', 'TERESCO', 'FRANCO'],
+            y: [45.6, 42.2, 38.2, 35.4],
             type: 'bar',
             name: 'Awareness Rate',
-            marker: { color: ['rgba(52, 152, 219, 0.7)', 'rgba(52, 152, 219, 0.7)', 'rgba(52, 152, 219, 0.7)'] },
-            text: ['45.6%', '38.2%', '35.4%'],
-            textposition: 'outside'
+            marker: { color: ['rgba(52, 152, 219, 0.7)', 'rgba(52, 152, 219, 0.7)', 'rgba(52, 152, 219, 0.7)', 'rgba(52, 152, 219, 0.7)'] },
+            text: ['45.6%', '42.2%', '38.2%', '35.4%'],
+            textposition: 'outside',
+            hovertemplate: '<b>%{x}</b><br>' +
+                          'Awareness Rate: %{y}%<br>' +
+                          '<extra></extra>'
         }
     ];
 
     const layout = {
-        title: { text: 'Institutional Performance Comparison', font: { size: 18, color: '#2c3e50' } },
+        title: { 
+            text: '🏫 Screening Rates by Institution', 
+            font: { size: 18, color: '#2c3e50', family: 'Inter, sans-serif' } 
+        },
+        subtitle: {
+            text: 'Institutional Performance Comparison',
+            font: { size: 14, color: '#7f8c8d' }
+        },
         barmode: 'group',
         plot_bgcolor: 'rgba(0,0,0,0)',
         paper_bgcolor: 'rgba(0,0,0,0)',
-        margin: { l: 60, r: 40, t: 60, b: 60 }
+        margin: { l: 60, r: 40, t: 80, b: 80 },
+        xaxis: {
+            title: 'Institution',
+            font: { size: 12, color: '#2c3e50' },
+            tickfont: { size: 11, color: '#2c3e50' }
+        },
+        yaxis: {
+            title: 'Percentage (%)',
+            font: { size: 12, color: '#2c3e50' },
+            tickfont: { size: 11, color: '#2c3e50' },
+            range: [0, 50]
+        },
+        legend: {
+            x: 0.7,
+            y: 1,
+            bgcolor: 'rgba(255,255,255,0.8)',
+            bordercolor: 'rgba(0,0,0,0.1)',
+            borderwidth: 1,
+            font: { size: 11, color: '#2c3e50' }
+        },
+        annotations: [
+            {
+                text: 'Based on Modified Poisson Regression Analysis of 354 participants',
+                showarrow: false,
+                x: 0.5,
+                y: -0.15,
+                xref: 'paper',
+                yref: 'paper',
+                font: { size: 10, color: '#7f8c8d' },
+                xanchor: 'center'
+            }
+        ]
     };
 
-    Plotly.newPlot('institutionChart', data, layout, { responsive: true, displaylogo: false });
+    const config = {
+        responsive: true,
+        displaylogo: false,
+        modeBarButtonsToRemove: ['pan2d', 'lasso2d', 'autoScale2d'],
+        toImageButtonOptions: {
+            format: 'png',
+            filename: 'institutional_comparison',
+            height: 500,
+            width: 800,
+            scale: 2
+        }
+    };
+
+    Plotly.newPlot('institutionChart', data, layout, config);
 }
 
 /**
