@@ -184,19 +184,40 @@
                 <!-- Cervical Cancer Screening Analytics Dashboard -->
                 <div class="project-card reveal-left">
                     <div class="project-image">
+                        <!-- Medical Animation Container -->
                         <div style="width: 100%; height: 200px; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1rem; position: relative; overflow: hidden;">
-                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
-                                <span style="font-size: 1.5rem;">🏥</span>
+                            
+                            <!-- Animated Medical Cross -->
+                            <div style="position: absolute; top: 20px; left: 20px; width: 30px; height: 30px;">
+                                <div style="position: absolute; width: 30px; height: 6px; background: white; top: 12px; border-radius: 3px; animation: pulse 2s infinite;"></div>
+                                <div style="position: absolute; width: 6px; height: 30px; background: white; left: 12px; border-radius: 3px; animation: pulse 2s infinite;"></div>
+                            </div>
+                            
+                            <!-- Central Content -->
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 15px; z-index: 2;">
+                                <span style="font-size: 1.5rem; animation: bounce 3s infinite;">🏥</span>
                                 <span>Cervical Cancer Screening Dashboard</span>
                             </div>
-                            <div style="display: flex; gap: 4px; margin-top: 8px;">
-                                <div style="width: 12px; height: 30px; background: rgba(255,255,255,0.7); border-radius: 2px;"></div>
-                                <div style="width: 12px; height: 15px; background: rgba(255,255,255,0.6); border-radius: 2px;"></div>
-                                <div style="width: 12px; height: 45px; background: rgba(255,255,255,0.8); border-radius: 2px;"></div>
-                                <div style="width: 12px; height: 25px; background: rgba(255,255,255,0.7); border-radius: 2px;"></div>
+                            
+                            <!-- Animated Data Bars -->
+                            <div style="display: flex; gap: 6px; margin-top: 8px; z-index: 2;">
+                                <div style="width: 12px; background: rgba(255,255,255,0.7); border-radius: 2px; animation: grow1 3s infinite; height: 30px;"></div>
+                                <div style="width: 12px; background: rgba(255,255,255,0.6); border-radius: 2px; animation: grow2 3s infinite; height: 15px;"></div>
+                                <div style="width: 12px; background: rgba(255,255,255,0.8); border-radius: 2px; animation: grow3 3s infinite; height: 45px;"></div>
+                                <div style="width: 12px; background: rgba(255,255,255,0.7); border-radius: 2px; animation: grow4 3s infinite; height: 25px;"></div>
                             </div>
-                            <div style="position: absolute; top: 10px; right: 10px; background: rgba(46, 204, 113, 0.9); padding: 4px 8px; border-radius: 12px; font-size: 0.7rem;">354 Participants</div>
-                            <div style="position: absolute; bottom: 10px; left: 10px; background: rgba(52, 152, 219, 0.9); padding: 4px 8px; border-radius: 12px; font-size: 0.7rem;">Modified Poisson</div>
+                            
+                            <!-- Floating Awareness Circles -->
+                            <div style="position: absolute; width: 15px; height: 15px; background: rgba(46, 204, 113, 0.8); border-radius: 50%; top: 30px; right: 30px; animation: float1 4s infinite ease-in-out;"></div>
+                            <div style="position: absolute; width: 12px; height: 12px; background: rgba(52, 152, 219, 0.8); border-radius: 50%; top: 60px; right: 60px; animation: float2 5s infinite ease-in-out;"></div>
+                            <div style="position: absolute; width: 10px; height: 10px; background: rgba(241, 196, 15, 0.8); border-radius: 50%; bottom: 40px; left: 50px; animation: float3 3.5s infinite ease-in-out;"></div>
+                            
+                            <!-- Stats Badges -->
+                            <div style="position: absolute; top: 10px; right: 10px; background: rgba(46, 204, 113, 0.9); padding: 4px 8px; border-radius: 12px; font-size: 0.7rem; animation: fadeInOut 2s infinite;">354 Participants</div>
+                            <div style="position: absolute; bottom: 10px; left: 10px; background: rgba(52, 152, 219, 0.9); padding: 4px 8px; border-radius: 12px; font-size: 0.7rem; animation: slideIn 3s infinite;">Modified Poisson</div>
+                            
+                            <!-- Background DNA/Medical Pattern -->
+                            <div style="position: absolute; width: 100%; height: 100%; background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><defs><pattern id=\"medical\" patternUnits=\"userSpaceOnUse\" width=\"20\" height=\"20\"><path d=\"M10,5 L15,10 L10,15 L5,10 Z\" fill=\"none\" stroke=\"rgba(255,255,255,0.1)\" stroke-width=\"1\"/></pattern></defs><rect width=\"100\" height=\"100\" fill=\"url(%23medical)\"/></svg>') repeat; opacity: 0.3; animation: backgroundMove 10s linear infinite;"></div>
                         </div>
                         <div class="project-overlay">
                             <span class="project-status live">Research Active</span>
