@@ -134,66 +134,280 @@
             font-weight: 500;
         }
 
-        /* Summary Cards */
-        .summary-section {
-            margin-bottom: 3rem;
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
+        /* Summary Cards - Enhanced Base Styles */
         .summary-card {
-            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
-            border-radius: 15px;
-            padding: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-left: 6px solid #3498db;
-            transition: all 0.3s ease;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
+            transform: translateY(0);
+            backdrop-filter: blur(20px);
         }
 
         .summary-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
         }
 
-        .summary-card.green { border-left-color: #27ae60; }
-        .summary-card.blue { border-left-color: #3498db; }
-        .summary-card.orange { border-left-color: #f39c12; }
-        .summary-card.purple { border-left-color: #9b59b6; }
-        .summary-card.red { border-left-color: #e74c3c; }
-
-        .card-title {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #7f8c8d;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
+        /* Card Content */
+        .card-title, .card-value, .card-description {
+            position: relative;
+            z-index: 2;
         }
 
         .card-description {
-            font-size: 0.9rem;
-            color: #95a5a6;
-            line-height: 1.4;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        /* Individual Card Colors with Unique Animated Gradients */
+        
+        /* 1. Emerald Dream - Participants */
+        .summary-card.emerald {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 50%, #11998e 100%);
+            color: white;
+            border: 3px solid rgba(255,255,255,0.3);
+            box-shadow: 0 15px 35px rgba(17, 153, 142, 0.3);
+        }
+        
+        .summary-card.emerald:hover {
+            background: linear-gradient(135deg, #38ef7d 0%, #11998e 50%, #38ef7d 100%);
+            box-shadow: 0 25px 50px rgba(56, 239, 125, 0.4);
+            transform: translateY(-12px) scale(1.05);
+        }
+
+        /* 2. Sapphire Ocean - Screening Uptake */
+        .summary-card.sapphire {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+            color: white;
+            border: 3px solid rgba(255,255,255,0.3);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+        }
+        
+        .summary-card.sapphire:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 50%, #764ba2 100%);
+            box-shadow: 0 25px 50px rgba(118, 75, 162, 0.4);
+            transform: translateY(-12px) scale(1.05);
+        }
+
+        /* 3. Sunset Glow - Awareness */
+        .summary-card.sunset {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #f093fb 100%);
+            color: white;
+            border: 3px solid rgba(255,255,255,0.3);
+            box-shadow: 0 15px 35px rgba(240, 147, 251, 0.3);
+        }
+        
+        .summary-card.sunset:hover {
+            background: linear-gradient(135deg, #f5576c 0%, #f093fb 50%, #f5576c 100%);
+            box-shadow: 0 25px 50px rgba(245, 87, 108, 0.4);
+            transform: translateY(-12px) scale(1.05);
+        }
+
+        /* 4. Cosmic Purple - Age */
+        .summary-card.cosmic {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 50%, #4facfe 100%);
+            color: white;
+            border: 3px solid rgba(255,255,255,0.3);
+            box-shadow: 0 15px 35px rgba(79, 172, 254, 0.3);
+        }
+        
+        .summary-card.cosmic:hover {
+            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #00f2fe 100%);
+            box-shadow: 0 25px 50px rgba(0, 242, 254, 0.4);
+            transform: translateY(-12px) scale(1.05);
+        }
+
+        /* 5. Cherry Blossom - Given Opportunity */
+        .summary-card.cherry {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 50%, #fa709a 100%);
+            color: white;
+            border: 3px solid rgba(255,255,255,0.3);
+            box-shadow: 0 15px 35px rgba(250, 112, 154, 0.3);
+        }
+        
+        .summary-card.cherry:hover {
+            background: linear-gradient(135deg, #fee140 0%, #fa709a 50%, #fee140 100%);
+            box-shadow: 0 25px 50px rgba(254, 225, 64, 0.4);
+            transform: translateY(-12px) scale(1.05);
+        }
+
+        /* 6. Fresh Mint - Self Initiative */
+        .summary-card.mint {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 50%, #a8edea 100%);
+            color: #2c3e50;
+            border: 3px solid rgba(44,62,80,0.2);
+            box-shadow: 0 15px 35px rgba(168, 237, 234, 0.3);
+        }
+        
+        .summary-card.mint:hover {
+            background: linear-gradient(135deg, #fed6e3 0%, #a8edea 50%, #fed6e3 100%);
+            box-shadow: 0 25px 50px rgba(254, 214, 227, 0.4);
+            transform: translateY(-12px) scale(1.05);
+        }
+
+        /* 7. Deep Ocean - Access Rate */
+        .summary-card.ocean {
+            background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 50%, #89f7fe 100%);
+            color: white;
+            border: 3px solid rgba(255,255,255,0.3);
+            box-shadow: 0 15px 35px rgba(137, 247, 254, 0.3);
+        }
+        
+        .summary-card.ocean:hover {
+            background: linear-gradient(135deg, #66a6ff 0%, #89f7fe 50%, #66a6ff 100%);
+            box-shadow: 0 25px 50px rgba(102, 166, 255, 0.4);
+            transform: translateY(-12px) scale(1.05);
+        }
+
+        /* 8. Aurora Borealis - Statistical Method */
+        .summary-card.aurora {
+            background: linear-gradient(135deg, #d299c2 0%, #fef9d7 50%, #d299c2 100%);
+            color: #2c3e50;
+            border: 3px solid rgba(44,62,80,0.2);
+            box-shadow: 0 15px 35px rgba(210, 153, 194, 0.3);
+        }
+        
+        .summary-card.aurora:hover {
+            background: linear-gradient(135deg, #fef9d7 0%, #d299c2 50%, #fef9d7 100%);
+            box-shadow: 0 25px 50px rgba(254, 249, 215, 0.4);
+            transform: translateY(-12px) scale(1.05);
+        }
+
+        /* Enhanced Card Animations */
+        .summary-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255,255,255,0.3), 
+                transparent
+            );
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+        }
+
+        .summary-card:hover::before {
+            left: 100%;
+        }
+
+        /* Floating Particles with Color Variations */
+        .summary-card::after {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 2px, transparent 2px);
+            background-size: 25px 25px;
+            top: -60px;
+            right: -60px;
+            border-radius: 50%;
+            animation: floatingParticles 10s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes floatingParticles {
+            0%, 100% { 
+                transform: rotate(0deg) scale(1); 
+                opacity: 0.2; 
+            }
+            25% { 
+                transform: rotate(90deg) scale(1.2); 
+                opacity: 0.6; 
+            }
+            50% { 
+                transform: rotate(180deg) scale(0.8); 
+                opacity: 0.8; 
+            }
+            75% { 
+                transform: rotate(270deg) scale(1.1); 
+                opacity: 0.4; 
+            }
+        }
+
+        /* Pulse Animation on Card Values */
+        .card-value {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0.8rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: valuePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes valuePulse {
+            0%, 100% { 
+                transform: scale(1); 
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.1); 
+            }
+            50% { 
+                transform: scale(1.05); 
+                text-shadow: 3px 3px 8px rgba(0,0,0,0.2); 
+            }
+        }
+
+        /* Card Icon Animation */
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { 
+                filter: brightness(1); 
+            }
+            100% { 
+                filter: brightness(1.1); 
+            }
+        }
+
+        .summary-card.indigo:hover {
+            background: linear-gradient(135deg, #fef9d7 0%, #d299c2 50%, #fef9d7 100%);
+            box-shadow: 0 25px 50px rgba(210, 153, 194, 0.4);
+        }
+
+        .summary-card.coral:hover {
+            background: linear-gradient(135deg, #66a6ff 0%, #89f7fe 50%, #66a6ff 100%);
+            box-shadow: 0 25px 50px rgba(102, 166, 255, 0.4);
+        }
+
+        /* Pulsing Animation for Critical Cards */
+        .summary-card.critical {
+            animation: criticalPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes criticalPulse {
+            0%, 100% { 
+                transform: translateY(0) scale(1);
+                box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            }
+            50% { 
+                transform: translateY(-5px) scale(1.02);
+                box-shadow: 0 20px 40px rgba(231, 76, 60, 0.3);
+            }
+        }
+
+        /* Shimmer Effect for High Performance Cards */
+        .summary-card.shimmer {
+            background-size: 200% 200%;
+            animation: shimmerMove 4s ease-in-out infinite;
+        }
+
+        @keyframes shimmerMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         /* Chart Containers */
@@ -276,7 +490,7 @@
             font-weight: 500;
         }
 
-        /* Responsive Design */
+        /* Enhanced Responsive Design */
         @media (max-width: 768px) {
             .dashboard-container {
                 margin: 1rem;
@@ -289,10 +503,59 @@
             
             .cards-container {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .summary-card {
+                padding: 1.5rem;
+            }
+            
+            .card-value {
+                font-size: 2.5rem;
+            }
+            
+            .summary-card:hover {
+                transform: translateY(-5px) scale(1.02);
             }
             
             .chart-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .chart-container {
+                padding: 1rem;
+            }
+        }
+
+        /* Cards Container Grid */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Special Click Effect */
+        .summary-card:active {
+            transform: translateY(-5px) scale(0.98);
+            transition: all 0.1s ease;
+        }
+
+        /* Accessibility - Focus States */
+        .summary-card:focus {
+            outline: 3px solid rgba(255, 255, 255, 0.8);
+            outline-offset: 4px;
+        }
+
+        /* Performance Optimization - Reduce animations on low-end devices */
+        @media (prefers-reduced-motion: reduce) {
+            .summary-card,
+            .card-value,
+            .card-title,
+            .summary-card::before,
+            .summary-card::after {
+                animation: none;
+                transition: none;
             }
         }
 
@@ -344,6 +607,36 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
         }
+
+        /* Staggered Loading Animation for Cards */
+        .summary-card {
+            opacity: 0;
+            transform: translateY(50px);
+            animation: cardSlideIn 0.8s ease-out forwards;
+        }
+
+        @keyframes cardSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Staggered delays for each card */
+        .summary-card:nth-child(1) { animation-delay: 0.1s; }
+        .summary-card:nth-child(2) { animation-delay: 0.2s; }
+        .summary-card:nth-child(3) { animation-delay: 0.3s; }
+        .summary-card:nth-child(4) { animation-delay: 0.4s; }
+        .summary-card:nth-child(5) { animation-delay: 0.5s; }
+        .summary-card:nth-child(6) { animation-delay: 0.6s; }
+        .summary-card:nth-child(7) { animation-delay: 0.7s; }
+        .summary-card:nth-child(8) { animation-delay: 0.8s; }
+
+        /* ...existing code... */
     </style>
 </head>
 <body>
@@ -368,42 +661,42 @@
         <section class="summary-section">
             <h2 class="section-title">📊 Study Overview</h2>
             <div class="cards-container">
-                <div class="summary-card green">
+                <div class="summary-card emerald">
                     <div class="card-title">👥 Total Participants</div>
                     <div class="card-value">354</div>
                     <div class="card-description">Female tertiary students from Hohoe Municipality, Ghana</div>
                 </div>
-                <div class="summary-card blue">
+                <div class="summary-card sapphire">
                     <div class="card-title">🎯 Screening Uptake Rate</div>
                     <div class="card-value">13.6%</div>
                     <div class="card-description">🚨 Critical - Action needed for public health intervention</div>
                 </div>
-                <div class="summary-card orange">
+                <div class="summary-card sunset">
                     <div class="card-title">🧠 Awareness Rate</div>
                     <div class="card-value">39.8%</div>
                     <div class="card-description">📊 Moderate awareness - Foundation for targeted interventions</div>
                 </div>
-                <div class="summary-card purple">
+                <div class="summary-card cosmic">
                     <div class="card-title">📅 Average Age</div>
                     <div class="card-value">22.1</div>
                     <div class="card-description">Young adult population in prime screening age range</div>
                 </div>
-                <div class="summary-card red">
+                <div class="summary-card cherry">
                     <div class="card-title">🎲 Given Opportunity</div>
                     <div class="card-value">14.0%</div>
                     <div class="card-description">Students who got screened when given opportunity</div>
                 </div>
-                <div class="summary-card green">
+                <div class="summary-card mint">
                     <div class="card-title">🏃‍♀️ Self Initiative</div>
                     <div class="card-value">12.6%</div>
                     <div class="card-description">Students who got screened without opportunity</div>
                 </div>
-                <div class="summary-card blue">
+                <div class="summary-card ocean">
                     <div class="card-title">🎯 Access Rate</div>
                     <div class="card-value">66.4%</div>
                     <div class="card-description">Students given screening opportunity - main bottleneck identified</div>
                 </div>
-                <div class="summary-card orange">
+                <div class="summary-card aurora">
                     <div class="card-title">📊 Statistical Method</div>
                     <div class="card-value">Poisson</div>
                     <div class="card-description">Modified Poisson Regression with robust standard errors</div>
@@ -535,5 +828,59 @@
 
     <!-- JavaScript for Interactive Charts -->
     <script src="dashboard.js"></script>
+    
+    <!-- Enhanced Card Interactions -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click event to cards for enhanced feedback
+            const cards = document.querySelectorAll('.summary-card');
+            
+            cards.forEach((card, index) => {
+                // Add accessibility
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('role', 'button');
+                
+                // Click and keyboard interaction
+                card.addEventListener('click', function() {
+                    // Add a temporary highlight effect
+                    this.style.filter = 'brightness(1.1)';
+                    setTimeout(() => {
+                        this.style.filter = '';
+                    }, 200);
+                });
+                
+                // Keyboard accessibility
+                card.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+                
+                // Add subtle parallax effect on mouse move
+                card.addEventListener('mousemove', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    
+                    this.style.transform = `translateY(-10px) scale(1.03) rotateX(${-y/10}deg) rotateY(${x/10}deg)`;
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                });
+            });
+            
+            // Add subtle page entrance animation
+            document.body.style.opacity = '0';
+            document.body.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                document.body.style.transition = 'all 1s ease-out';
+                document.body.style.opacity = '1';
+                document.body.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
 </body>
 </html>
