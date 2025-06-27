@@ -223,13 +223,14 @@
             gap: 2rem;
         }
 
-        /* Key Findings Section */
+        /* Study Methodology Section */
         .findings-section {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
             border-radius: 15px;
             padding: 2rem;
             margin-bottom: 2rem;
             border-left: 6px solid #e74c3c;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
         .findings-title {
@@ -248,16 +249,31 @@
         }
 
         .findings-list li {
-            background: white;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
             margin-bottom: 1rem;
-            padding: 1rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
             border-left: 4px solid #3498db;
+            transition: all 0.3s ease;
+        }
+
+        .findings-list li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.12);
         }
 
         .findings-list li strong {
             color: #e74c3c;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .findings-list li {
+            color: #2c3e50;
+            font-size: 1rem;
+            line-height: 1.6;
+            font-weight: 500;
         }
 
         /* Responsive Design */
@@ -424,6 +440,14 @@
         <section class="chart-section">
             <h2 class="section-title">📈 Interactive Data Visualizations</h2>
             
+            <!-- Sankey Diagram - Featured -->
+            <div class="chart-container" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <h3 class="chart-title" style="color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">
+                    🌊 Patient Journey Flow - From Awareness to Screening
+                </h3>
+                <div id="sankeyChart" style="height: 500px;"></div>
+            </div>
+            
             <div class="chart-grid">
                 <!-- Screening Uptake by Opportunity Chart -->
                 <div class="chart-container">
@@ -448,6 +472,38 @@
                     <h3 class="chart-title">📊 Modified Poisson Regression Results</h3>
                     <div id="regressionChart" style="height: 400px;"></div>
                 </div>
+
+                <!-- New: Barriers Analysis Chart -->
+                <div class="chart-container">
+                    <h3 class="chart-title">🚧 Main Barriers to Screening</h3>
+                    <div id="barriersChart" style="height: 400px;"></div>
+                </div>
+
+                <!-- New: Institutional Comparison -->
+                <div class="chart-container">
+                    <h3 class="chart-title">🏫 Screening Rates by Institution</h3>
+                    <div id="institutionChart" style="height: 400px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Dashboard Link Section -->
+        <section class="findings-section" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white; border-left-color: #ecf0f1;">
+            <h2 class="findings-title" style="color: white;">
+                <i class="fas fa-external-link-alt"></i>
+                Explore Full Interactive Dashboard
+            </h2>
+            <div style="text-align: center; padding: 2rem;">
+                <p style="font-size: 1.2rem; margin-bottom: 2rem; color: rgba(255,255,255,0.9);">
+                    Experience the complete interactive dashboard with advanced filtering, detailed statistical analysis, and dynamic visualizations.
+                </p>
+                <a href="http://localhost:8501/" target="_blank" style="display: inline-block; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; text-decoration: none; padding: 1rem 2rem; border-radius: 25px; font-weight: 700; font-size: 1.1rem; box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3); transition: all 0.3s ease;">
+                    <i class="fas fa-rocket" style="margin-right: 0.5rem;"></i>
+                    Launch Full Dashboard
+                </a>
+                <p style="font-size: 0.9rem; margin-top: 1rem; opacity: 0.8;">
+                    🔬 Advanced statistical modeling • 📊 Real-time data filtering • 🎯 Detailed demographic analysis
+                </p>
             </div>
         </section>
 

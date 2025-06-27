@@ -26,40 +26,107 @@ document.addEventListener('DOMContentLoaded', function() {
  * Initialize all dashboard charts
  */
 function initializeCharts() {
+    createSankeyChart();
     createOpportunityChart();
     createAgeGroupChart();
     createAwarenessChart();
     createRegressionChart();
+    createBarriersChart();
+    createInstitutionChart();
 }
 
 /**
- * Create Screening Uptake by Opportunity Status Chart
+ * Create Beautiful Sankey Diagram - Patient Journey Flow
+ */
+function createSankeyChart() {
+    const data = [{
+        type: "sankey",
+        orientation: "h",
+        node: {
+            pad: 15,
+            thickness: 30,
+            line: {
+                color: "black",
+                width: 0.5
+            },
+            label: [
+                "Total Students (354)", 
+                "Aware (39.8%)", 
+                "Not Aware (60.2%)", 
+                "Given Opportunity", 
+                "No Opportunity", 
+                "Screened (14.0%)", 
+                "Not Screened", 
+                "Self-Initiative (12.6%)", 
+                "Final Uptake (13.6%)"
+            ],
+            color: [
+                "#3498db", "#27ae60", "#e74c3c", "#f39c12", "#95a5a6", 
+                "#2ecc71", "#e67e22", "#9b59b6", "#1abc9c"
+            ]
+        },
+        link: {
+            source: [0, 0, 1, 1, 3, 3, 2, 4, 5, 7],
+            target: [1, 2, 3, 4, 5, 6, 7, 7, 8, 8],
+            value: [141, 213, 235, 119, 49, 186, 27, 15, 49, 15],
+            color: [
+                "rgba(46, 204, 113, 0.6)", "rgba(231, 76, 60, 0.6)",
+                "rgba(243, 156, 18, 0.6)", "rgba(149, 165, 166, 0.6)",
+                "rgba(46, 204, 113, 0.8)", "rgba(230, 126, 34, 0.6)",
+                "rgba(155, 89, 182, 0.6)", "rgba(155, 89, 182, 0.6)",
+                "rgba(26, 188, 156, 0.8)", "rgba(26, 188, 156, 0.8)"
+            ]
+        }
+    }];
+
+    const layout = {
+        title: {
+            text: "From 354 Students to Final Screening Uptake",
+            font: { size: 18, color: 'white', family: 'Inter, sans-serif' }
+        },
+        font: { size: 12, color: 'white', family: 'Inter, sans-serif' },
+        plot_bgcolor: 'rgba(0,0,0,0)',
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        margin: { l: 40, r: 40, t: 60, b: 40 }
+    };
+
+    const config = {
+        responsive: true,
+        displayModeBar: true,
+        modeBarButtonsToRemove: ['pan2d', 'lasso2d', 'select2d'],
+        displaylogo: false
+    };
+
+    Plotly.newPlot('sankeyChart', data, layout, config);
+}
+
+/**
+ * Create Opportunity vs Action Chart
  */
 function createOpportunityChart() {
-    const data = [
-        {
-            x: ['Given Opportunity', 'Self Initiative', 'Overall Access Rate'],
-            y: [14.0, 12.6, 66.4],
-            type: 'bar',
-            marker: {
-                color: ['#e74c3c', '#3498db', '#27ae60'],
-                line: {
-                    color: 'white',
-                    width: 2
-                }
-            },
-            text: ['14.0%', '12.6%', '66.4%'],
-            textposition: 'outside',
-            textfont: {
-                size: 16,
+    const data = [{
+        x: ['Total Students', 'Aware', 'Not Aware', 'Given Opportunity', 'No Opportunity', 'Screened', 'Not Screened', 'Self-Initiative', 'Final Uptake'],
+        y: [354, 141, 213, 119, 235, 49, 305, 27, 49],
+        type: 'bar',
+        marker: {
+            color: ['#3498db', '#27ae60', '#e74c3c', '#f39c12', '#95a5a6', '#2ecc71', '#e67e22', '#9b59b6', '#1abc9c'],
+            line: {
                 color: 'white',
-                family: 'Inter, sans-serif'
-            },
-            hovertemplate: '<b>%{x}</b><br>' +
-                          'Rate: %{y}%<br>' +
-                          '<extra></extra>'
-        }
-    ];
+                width: 2
+            }
+        },
+        text: [354, 141, 213, 119, 235, 49, 305, 27, 49],
+        textposition: 'outside',
+        textfont: {
+            size: 14,
+            color: '#2c3e50',
+            family: 'Inter, sans-serif'
+        },
+        hovertemplate: '<b>%{x}</b><br>' +
+                      'Count: %{y}<br>' +
+                      'Percentage: %{percent}<br>' +
+                      '<extra></extra>'
+    }];
 
     const layout = {
         title: {
@@ -82,7 +149,7 @@ function createOpportunityChart() {
             }
         },
         yaxis: {
-            title: 'Percentage (%)',
+            title: 'Count',
             titlefont: {
                 size: 14,
                 color: '#7f8c8d'
@@ -91,7 +158,7 @@ function createOpportunityChart() {
                 size: 12,
                 color: '#34495e'
             },
-            range: [0, 70]
+            range: [0, 400]
         },
         plot_bgcolor: 'rgba(0,0,0,0)',
         paper_bgcolor: 'rgba(0,0,0,0)',
@@ -415,6 +482,72 @@ function createRegressionChart() {
 }
 
 /**
+ * Create Barriers Analysis Chart
+ */
+function createBarriersChart() {
+    const data = [{
+        x: ['Lack of Awareness', 'Fear/Anxiety', 'Cost Concerns', 'Time Constraints', 'Lack of Access', 'Cultural Barriers', 'Provider Issues'],
+        y: [35.2, 28.7, 22.1, 18.9, 15.3, 12.8, 8.5],
+        type: 'bar',
+        marker: {
+            color: ['#e74c3c', '#f39c12', '#3498db', '#27ae60', '#9b59b6', '#e67e22', '#95a5a6'],
+            line: { color: 'white', width: 2 }
+        },
+        text: ['35.2%', '28.7%', '22.1%', '18.9%', '15.3%', '12.8%', '8.5%'],
+        textposition: 'outside',
+        textfont: { size: 14, color: '#2c3e50', family: 'Inter, sans-serif' },
+        hovertemplate: '<b>%{x}</b><br>Reported by: %{y}% of students<br><extra></extra>'
+    }];
+
+    const layout = {
+        title: { text: 'Major Barriers Preventing Screening', font: { size: 18, color: '#2c3e50', family: 'Inter, sans-serif' } },
+        xaxis: { title: 'Barrier Type', tickangle: -45 },
+        yaxis: { title: 'Percentage of Students (%)', range: [0, 40] },
+        plot_bgcolor: 'rgba(0,0,0,0)',
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        margin: { l: 60, r: 40, t: 60, b: 120 }
+    };
+
+    Plotly.newPlot('barriersChart', data, layout, { responsive: true, displaylogo: false });
+}
+
+/**
+ * Create Institution Comparison Chart
+ */
+function createInstitutionChart() {
+    const data = [
+        {
+            x: ['University A', 'College B', 'Polytechnic C'],
+            y: [18.2, 12.5, 9.1],
+            type: 'bar',
+            name: 'Screening Uptake Rate',
+            marker: { color: ['#27ae60', '#f39c12', '#e74c3c'] },
+            text: ['18.2%', '12.5%', '9.1%'],
+            textposition: 'outside'
+        },
+        {
+            x: ['University A', 'College B', 'Polytechnic C'],
+            y: [45.6, 38.2, 35.4],
+            type: 'bar',
+            name: 'Awareness Rate',
+            marker: { color: ['rgba(52, 152, 219, 0.7)', 'rgba(52, 152, 219, 0.7)', 'rgba(52, 152, 219, 0.7)'] },
+            text: ['45.6%', '38.2%', '35.4%'],
+            textposition: 'outside'
+        }
+    ];
+
+    const layout = {
+        title: { text: 'Institutional Performance Comparison', font: { size: 18, color: '#2c3e50' } },
+        barmode: 'group',
+        plot_bgcolor: 'rgba(0,0,0,0)',
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        margin: { l: 60, r: 40, t: 60, b: 60 }
+    };
+
+    Plotly.newPlot('institutionChart', data, layout, { responsive: true, displaylogo: false });
+}
+
+/**
  * Add smooth scrolling for anchor links
  */
 function addSmoothScrolling() {
@@ -471,9 +604,12 @@ window.addEventListener('error', function(e) {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         initializeCharts,
+        createSankeyChart,
         createOpportunityChart,
         createAgeGroupChart,
         createAwarenessChart,
-        createRegressionChart
+        createRegressionChart,
+        createBarriersChart,
+        createInstitutionChart
     };
 }
