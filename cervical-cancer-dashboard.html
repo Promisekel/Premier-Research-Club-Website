@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Cervical Cancer Screening Analytics Dashboard | Premier Research Club</title>
+    <meta name="description" content="Interactive dashboard analyzing cervical cancer screening uptake among female tertiary students in Ghana - Statistical analysis using Modified Poisson Regression">
+    <meta name="keywords" content="cervical cancer, screening, Ghana, healthcare analytics, research, statistics">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://premier-research-club.netlify.app/cervical-cancer-dashboard.html">
+    <meta property="og:title" content="Cervical Cancer Screening Analytics Dashboard">
+    <meta property="og:description" content="Interactive dashboard analyzing cervical cancer screening uptake among 354 female tertiary students in Ghana">
+    <meta property="og:image" content="https://premier-research-club.netlify.app/assets/images/dashboard-preview.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://premier-research-club.netlify.app/cervical-cancer-dashboard.html">
+    <meta property="twitter:title" content="Cervical Cancer Screening Analytics Dashboard">
+    <meta property="twitter:description" content="Interactive dashboard analyzing cervical cancer screening uptake among 354 female tertiary students in Ghana">
+    <meta property="twitter:image" content="https://premier-research-club.netlify.app/assets/images/dashboard-preview.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Plotly.js for Interactive Charts -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    
+    <!-- Chart.js as Fallback -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard-responsive.css">
+    
+    <!-- Dashboard-specific CSS -->
+    <style>
+        /* 🎨 Beautiful Orange-Pink Gradient Background - Inspired by Streamlit Dashboard */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, 
+                #ff9a56 0%,     /* Warm orange */
+                #ff7b39 12%,    /* Rich orange */
+                #ff6b2b 25%,    /* Deep orange */
+                #ff5722 38%,    /* Orange-red */
+                #ff4757 50%,    /* Coral-red */
+                #ff3838 62%,    /* Bright red */
+                #ff2d92 75%,    /* Pink-red */
+                #ff1744 88%,    /* Vibrant pink-red */
+                #e91e63 100%    /* Deep pink */
+            );
+            background-attachment: fixed;
+            min-height: 100vh;
+            position: relative;
+            animation: backgroundPulse 12s ease-in-out infinite;
+        }
+
+        /* Background Animation */
+        @keyframes backgroundPulse {
+            0%, 100% {
+                filter: hue-rotate(0deg) saturate(1) brightness(1);
+            }
+            25% {
+                filter: hue-rotate(3deg) saturate(1.08) brightness(1.04);
+            }
+            50% {
+                filter: hue-rotate(-2deg) saturate(1.12) brightness(1.06);
+            }
+            75% {
+                filter: hue-rotate(5deg) saturate(1.05) brightness(1.02);
+            }
+        }
+
+        /* Main Container */
+        .dashboard-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            margin: 2rem;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header Section */
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+            100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+        }
+
+        .dashboard-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .dashboard-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* Summary Cards */
+        .summary-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left: 6px solid #3498db;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .summary-card.green { border-left-color: #27ae60; }
+        .summary-card.blue { border-left-color: #3498db; }
+        .summary-card.orange { border-left-color: #f39c12; }
+        .summary-card.purple { border-left-color: #9b59b6; }
+        .summary-card.red { border-left-color: #e74c3c; }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #7f8c8d;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            font-size: 0.9rem;
+            color: #95a5a6;
+            line-height: 1.4;
+        }
+
+        /* Chart Containers */
+        .chart-section {
+            margin-bottom: 3rem;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .chart-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Key Findings Section */
+        .findings-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 6px solid #e74c3c;
+        }
+
+        .findings-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .findings-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .findings-list li {
+            background: white;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid #3498db;
+        }
+
+        .findings-list li strong {
+            color: #e74c3c;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+            
+            .dashboard-title {
+                font-size: 2rem;
+            }
+            
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Back Button */
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(52, 152, 219, 0.9);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-button:hover {
+            background: rgba(52, 152, 219, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <!-- Back Button -->
+    <a href="index.html" class="back-button">
+        <i class="fas fa-arrow-left"></i>
+        Back to Homepage
+    </a>
+
+    <div class="dashboard-container">
+        <!-- Header Section -->
+        <header class="dashboard-header">
+            <h1 class="dashboard-title">
+                🏥 Cervical Cancer Screening Analytics Dashboard
+            </h1>
+            <p class="dashboard-subtitle">
+                Female Tertiary Students in Ghana - Comprehensive Statistical Analysis
+            </p>
+        </header>
+
+        <!-- Summary Cards Section -->
+        <section class="summary-section">
+            <h2 class="section-title">📊 Study Overview</h2>
+            <div class="cards-container">
+                <div class="summary-card green">
+                    <div class="card-title">👥 Total Participants</div>
+                    <div class="card-value">354</div>
+                    <div class="card-description">Female tertiary students from Hohoe Municipality, Ghana</div>
+                </div>
+                <div class="summary-card blue">
+                    <div class="card-title">🎯 Screening Uptake Rate</div>
+                    <div class="card-value">13.6%</div>
+                    <div class="card-description">🚨 Critical - Action needed for public health intervention</div>
+                </div>
+                <div class="summary-card orange">
+                    <div class="card-title">🧠 Awareness Rate</div>
+                    <div class="card-value">39.8%</div>
+                    <div class="card-description">📊 Moderate awareness - Foundation for targeted interventions</div>
+                </div>
+                <div class="summary-card purple">
+                    <div class="card-title">📅 Average Age</div>
+                    <div class="card-value">22.1</div>
+                    <div class="card-description">Young adult population in prime screening age range</div>
+                </div>
+                <div class="summary-card red">
+                    <div class="card-title">🎲 Given Opportunity</div>
+                    <div class="card-value">14.0%</div>
+                    <div class="card-description">Students who got screened when given opportunity</div>
+                </div>
+                <div class="summary-card green">
+                    <div class="card-title">🏃‍♀️ Self Initiative</div>
+                    <div class="card-value">12.6%</div>
+                    <div class="card-description">Students who got screened without opportunity</div>
+                </div>
+                <div class="summary-card blue">
+                    <div class="card-title">🎯 Access Rate</div>
+                    <div class="card-value">66.4%</div>
+                    <div class="card-description">Students given screening opportunity - main bottleneck identified</div>
+                </div>
+                <div class="summary-card orange">
+                    <div class="card-title">📊 Statistical Method</div>
+                    <div class="card-value">Poisson</div>
+                    <div class="card-description">Modified Poisson Regression with robust standard errors</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Findings Section -->
+        <section class="findings-section">
+            <h2 class="findings-title">
+                <i class="fas fa-lightbulb"></i>
+                Critical Research Findings
+            </h2>
+            <ul class="findings-list">
+                <li>
+                    <strong>Opportunity Gap:</strong> Only 14.0% of students got screened when given the opportunity, compared to 12.6% who took self-initiative, highlighting missed opportunities in healthcare delivery.
+                </li>
+                <li>
+                    <strong>Access Bottleneck:</strong> 66.4% of students were given screening opportunities, but the conversion rate remains critically low, indicating systemic barriers beyond access.
+                </li>
+                <li>
+                    <strong>Low Overall Uptake:</strong> With only 13.6% screening uptake rate, urgent public health interventions are needed to meet WHO recommendations.
+                </li>
+                <li>
+                    <strong>Statistical Significance:</strong> Modified Poisson Regression reveals that opportunity provision is the primary predictor, but quality of counseling and follow-up mechanisms need improvement.
+                </li>
+                <li>
+                    <strong>Awareness-Action Gap:</strong> Despite 39.8% awareness rate, the screening uptake remains low, suggesting knowledge doesn't automatically translate to health-seeking behavior.
+                </li>
+            </ul>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="chart-section">
+            <h2 class="section-title">📈 Interactive Data Visualizations</h2>
+            
+            <div class="chart-grid">
+                <!-- Screening Uptake by Opportunity Chart -->
+                <div class="chart-container">
+                    <h3 class="chart-title">🎯 Screening Uptake by Opportunity Status</h3>
+                    <div id="opportunityChart" style="height: 400px;"></div>
+                </div>
+
+                <!-- Age Group Distribution Chart -->
+                <div class="chart-container">
+                    <h3 class="chart-title">👥 Age Group Distribution</h3>
+                    <div id="ageChart" style="height: 400px;"></div>
+                </div>
+
+                <!-- Awareness vs Uptake Chart -->
+                <div class="chart-container">
+                    <h3 class="chart-title">🧠 Awareness vs Actual Screening Uptake</h3>
+                    <div id="awarenessChart" style="height: 400px;"></div>
+                </div>
+
+                <!-- Statistical Model Results -->
+                <div class="chart-container">
+                    <h3 class="chart-title">📊 Modified Poisson Regression Results</h3>
+                    <div id="regressionChart" style="height: 400px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Study Methodology Section -->
+        <section class="findings-section">
+            <h2 class="findings-title">
+                <i class="fas fa-microscope"></i>
+                Study Methodology
+            </h2>
+            <ul class="findings-list">
+                <li>
+                    <strong>Study Design:</strong> Cross-sectional analytical study among female tertiary students in Hohoe Municipality, Ghana.
+                </li>
+                <li>
+                    <strong>Sample Size:</strong> 354 participants recruited through systematic random sampling from three tertiary institutions.
+                </li>
+                <li>
+                    <strong>Statistical Analysis:</strong> Modified Poisson Regression with robust standard errors (HC0) to estimate Risk Ratios rather than Odds Ratios.
+                </li>
+                <li>
+                    <strong>Key Variables:</strong> Primary outcome - Cervical cancer screening uptake (Binary: Yes/No). Predictors include demographics, awareness variables, and knowledge domains.
+                </li>
+                <li>
+                    <strong>Risk Ratio Interpretation:</strong> RR > 1 indicates higher likelihood of screening compared to reference group; RR < 1 indicates lower likelihood.
+                </li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- JavaScript for Interactive Charts -->
+    <script src="dashboard.js"></script>
+</body>
+</html>

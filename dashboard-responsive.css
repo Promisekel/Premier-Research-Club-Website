@@ -1,0 +1,97 @@
+/* Additional CSS for the dashboard page - Mobile optimization and enhancements */
+
+/* Enhanced mobile responsiveness */
+@media (max-width: 480px) {
+    .dashboard-container {
+        margin: 0.5rem;
+        padding: 1rem;
+    }
+    
+    .dashboard-title {
+        font-size: 1.5rem;
+    }
+    
+    .dashboard-subtitle {
+        font-size: 1rem;
+    }
+    
+    .cards-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .card-value {
+        font-size: 2rem;
+    }
+    
+    .back-button {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Print styles */
+@media print {
+    .back-button {
+        display: none;
+    }
+    
+    .dashboard-container {
+        margin: 0;
+        box-shadow: none;
+    }
+    
+    body {
+        background: white !important;
+    }
+}
+
+/* Dark mode support (if browser prefers dark) */
+@media (prefers-color-scheme: dark) {
+    .dashboard-container {
+        background: rgba(45, 52, 54, 0.95);
+        color: #ddd;
+    }
+    
+    .summary-card {
+        background: linear-gradient(145deg, #2c3e50 0%, #34495e 100%);
+        color: #ecf0f1;
+    }
+    
+    .card-value {
+        color: #ecf0f1;
+    }
+    
+    .section-title,
+    .chart-title,
+    .findings-title {
+        color: #ecf0f1;
+    }
+}
+
+/* Accessibility improvements */
+.summary-card:focus,
+.back-button:focus {
+    outline: 3px solid #3498db;
+    outline-offset: 2px;
+}
+
+/* Reduced motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .summary-card {
+        border: 2px solid #000;
+    }
+    
+    .back-button {
+        border: 2px solid #fff;
+    }
+}
