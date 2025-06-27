@@ -122,16 +122,20 @@
         }
 
         .dashboard-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 3rem;
+            font-weight: 900;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            margin-bottom: 1rem;
+            line-height: 1.2;
         }
 
         .dashboard-subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
+            font-size: 1.3rem;
             font-weight: 500;
+            color: rgba(255,255,255,0.95);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+            margin-bottom: 0;
         }
 
         /* Summary Cards - Enhanced Base Styles */
@@ -158,10 +162,32 @@
             z-index: 2;
         }
 
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .card-value {
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin-bottom: 0.8rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+            animation: valuePulse 3s ease-in-out infinite;
+            line-height: 1;
+        }
+
         .card-description {
-            font-size: 0.95rem;
-            line-height: 1.5;
-            font-weight: 500;
+            font-size: 1rem;
+            line-height: 1.6;
+            font-weight: 600;
+            text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.05);
+            opacity: 0.95;
         }
 
         /* Individual Card Colors with Unique Animated Gradients */
@@ -335,11 +361,12 @@
 
         /* Pulse Animation on Card Values */
         .card-value {
-            font-size: 3rem;
+            font-size: 3.2rem;
             font-weight: 900;
             margin-bottom: 0.8rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
             animation: valuePulse 3s ease-in-out infinite;
+            line-height: 1;
         }
 
         @keyframes valuePulse {
@@ -355,13 +382,14 @@
 
         /* Card Icon Animation */
         .card-title {
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 1.15rem;
+            font-weight: 700;
             margin-bottom: 0.8rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
             animation: titleGlow 2s ease-in-out infinite alternate;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         @keyframes titleGlow {
@@ -488,6 +516,137 @@
             font-size: 1rem;
             line-height: 1.6;
             font-weight: 500;
+        }
+
+        /* Model Results Section Styling */
+        .model-results-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            border: 2px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .model-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .model-summary {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-left: 6px solid #667eea;
+        }
+
+        .model-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .model-description {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #34495e;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .model-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .highlight-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+        }
+
+        .highlight-icon {
+            font-size: 2rem;
+            background: rgba(255,255,255,0.2);
+            padding: 0.8rem;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .highlight-content h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .highlight-content p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+            opacity: 0.95;
+        }
+
+        /* Forest Plot Container */
+        .forest-plot-container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .plot-legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            display: inline-block;
+        }
+
+        .legend-marker {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #e74c3c;
         }
 
         /* Enhanced Responsive Design */
@@ -636,7 +795,79 @@
         .summary-card:nth-child(7) { animation-delay: 0.7s; }
         .summary-card:nth-child(8) { animation-delay: 0.8s; }
 
-        /* ...existing code... */
+        /* Enhanced Section Titles and Typography */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        /* Responsive Design for Model Section */
+        @media (max-width: 768px) {
+            .model-results-section {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+            
+            .model-summary {
+                padding: 1.5rem;
+            }
+            
+            .model-title {
+                font-size: 1.5rem;
+            }
+            
+            .model-description {
+                font-size: 1rem;
+            }
+            
+            .model-highlights {
+                grid-template-columns: 1fr;
+            }
+            
+            .highlight-card {
+                padding: 1.2rem;
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .highlight-icon {
+                margin-bottom: 0.5rem;
+            }
+            
+            .forest-plot-container {
+                padding: 1.5rem;
+            }
+            
+            .plot-legend {
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+            
+            .legend-item {
+                font-size: 0.85rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -673,8 +904,8 @@
                 </div>
                 <div class="summary-card sunset">
                     <div class="card-title">🧠 Awareness Rate</div>
-                    <div class="card-value">39.8%</div>
-                    <div class="card-description">📊 Moderate awareness - Foundation for targeted interventions</div>
+                    <div class="card-value">35.0%</div>
+                    <div class="card-description">📊 Students aware of screening centers - Foundation for interventions</div>
                 </div>
                 <div class="summary-card cosmic">
                     <div class="card-title">📅 Average Age</div>
@@ -683,23 +914,82 @@
                 </div>
                 <div class="summary-card cherry">
                     <div class="card-title">🎲 Given Opportunity</div>
-                    <div class="card-value">14.0%</div>
-                    <div class="card-description">Students who got screened when given opportunity</div>
+                    <div class="card-value">95.5%</div>
+                    <div class="card-description">Uptake rate when given opportunity AND no perceived pain</div>
                 </div>
                 <div class="summary-card mint">
-                    <div class="card-title">🏃‍♀️ Self Initiative</div>
-                    <div class="card-value">12.6%</div>
-                    <div class="card-description">Students who got screened without opportunity</div>
+                    <div class="card-title">🏃‍♀️ Overall Uptake</div>
+                    <div class="card-value">48</div>
+                    <div class="card-description">Total students who completed cervical cancer screening</div>
                 </div>
                 <div class="summary-card ocean">
-                    <div class="card-title">🎯 Access Rate</div>
-                    <div class="card-value">66.4%</div>
-                    <div class="card-description">Students given screening opportunity - main bottleneck identified</div>
+                    <div class="card-title">🎯 Ever Told to Screen</div>
+                    <div class="card-value">40.0%</div>
+                    <div class="card-description">Students who were ever advised to get screened</div>
                 </div>
                 <div class="summary-card aurora">
                     <div class="card-title">📊 Statistical Method</div>
                     <div class="card-value">Poisson</div>
                     <div class="card-description">Modified Poisson Regression with robust standard errors</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Poisson Model Results Section -->
+        <section class="model-results-section">
+            <h2 class="section-title">🔬 Statistical Model Results</h2>
+            <div class="model-container">
+                <div class="model-summary">
+                    <h3 class="model-title">📈 Modified Poisson Regression Analysis</h3>
+                    <p class="model-description">
+                        We employed Modified Poisson Regression with robust standard errors (HC0) to estimate 
+                        <strong>Risk Ratios (RR)</strong> rather than Odds Ratios, providing more interpretable results 
+                        for the prevalence of cervical cancer screening uptake among the 354 participants.
+                    </p>
+                    
+                    <div class="model-highlights">
+                        <div class="highlight-card">
+                            <div class="highlight-icon">🎯</div>
+                            <div class="highlight-content">
+                                <h4>Primary Outcome</h4>
+                                <p>Cervical cancer screening uptake (Binary: Yes/No)</p>
+                            </div>
+                        </div>
+                        <div class="highlight-card">
+                            <div class="highlight-icon">📊</div>
+                            <div class="highlight-content">
+                                <h4>Risk Ratio Interpretation</h4>
+                                <p>RR > 1: Higher likelihood vs reference group<br>RR < 1: Lower likelihood vs reference group</p>
+                            </div>
+                        </div>
+                        <div class="highlight-card">
+                            <div class="highlight-icon">🔍</div>
+                            <div class="highlight-content">
+                                <h4>Statistical Significance</h4>
+                                <p>* indicates p < 0.05 (statistically significant predictors)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Forest Plot Container -->
+                <div class="forest-plot-container">
+                    <h3 class="chart-title">🌳 Forest Plot: Crude and Adjusted Relative Risks</h3>
+                    <div id="forestPlot" style="height: 600px; width: 100%;"></div>
+                    <div class="plot-legend">
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #ff7b39;"></span>
+                            <span>Crude RR (95% CI)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #11998e;"></span>
+                            <span>Adjusted RR (95% CI)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-marker">*</span>
+                            <span>p < 0.05 (Statistically Significant)</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

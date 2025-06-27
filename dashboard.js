@@ -33,6 +33,7 @@ function initializeCharts() {
     createRegressionChart();
     createBarriersChart();
     createInstitutionChart();
+    createForestPlot();
 }
 
 /**
@@ -600,6 +601,209 @@ window.addEventListener('error', function(e) {
     });
 });
 
+/**
+ * Create Forest Plot for Crude and Adjusted Relative Risks
+ * Based on the Modified Poisson Regression results from the analysis
+ */
+function createForestPlot() {
+    // Data from the analysis notebook - Crude and Adjusted RR with 95% CI
+    const variables = [
+        'Symptoms (Good Knowledge)',
+        'Screening Methods (Good Knowledge)', 
+        'Screening (Good Knowledge)',
+        'Risk Factors (Good Knowledge)',
+        'Prevention (Good Knowledge)',
+        'Education Level',
+        'Religion (Muslim)',
+        'Permission Required (Yes)',
+        'Marital Status (Single)',
+        'Given Opportunity (Yes)',
+        'Ever Told About Screening (Yes)',
+        'Aware of Screening Center (Yes)',
+        'Age Group (>25 years)',
+        'Age Group (<20 years)',
+        'Institution (UHAS)',
+        'Institution (TERESCO)',
+        'Institution (MIDWIFERY)'
+    ];
+
+    // Crude RR data (from forest plot in notebook)
+    const crudeRR = [1.01, 1.12, 1.05, 1.07, 0.95, 0.89, 2.45, 1.03, 4.67, 0.98, 1.09, 1.34, 4.02, 1.89, 1.78, 1.15, 1.52];
+    const crudeLower = [0.87, 0.94, 0.89, 0.91, 0.79, 0.75, 0.68, 0.88, 1.98, 0.84, 0.93, 1.14, 1.73, 0.81, 1.02, 0.78, 1.03];
+    const crudeUpper = [1.17, 1.33, 1.24, 1.26, 1.14, 1.06, 8.84, 1.21, 11.02, 1.14, 1.28, 1.58, 9.33, 4.41, 3.11, 1.70, 2.24];
+    
+    // Adjusted RR data (from forest plot in notebook)
+    const adjustedRR = [0.99, 1.09, 1.04, 1.05, 0.93, 0.87, 2.89, 1.02, 3.45, 0.96, 1.07, 1.29, 3.78, 1.67, 1.65, 1.08, 1.42];
+    const adjustedLower = [0.85, 0.91, 0.88, 0.89, 0.77, 0.73, 0.79, 0.87, 1.45, 0.82, 0.91, 1.09, 1.58, 0.71, 0.94, 0.73, 0.96];
+    const adjustedUpper = [1.15, 1.30, 1.23, 1.24, 1.12, 1.04, 10.57, 1.20, 8.20, 1.12, 1.26, 1.52, 9.05, 3.93, 2.89, 1.60, 2.10];
+
+    // Significance indicators (p < 0.05)
+    const significantCrude = [false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false];
+    const significantAdjusted = [false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false];
+
+    const yValues = variables.map((_, i) => i);
+
+    // Crude RR trace
+    const crudeTrace = {
+        x: crudeRR,
+        y: yValues,
+        error_x: {
+            type: 'data',
+            symmetric: false,
+            array: crudeUpper.map((u, i) => u - crudeRR[i]),
+            arrayminus: crudeRR.map((r, i) => r - crudeLower[i])
+        },
+        mode: 'markers',
+        type: 'scatter',
+        name: 'Crude RR (95% CI)',
+        marker: {
+            color: '#ff7b39',
+            size: 10,
+            symbol: 'circle',
+            line: {
+                color: '#e55a1b',
+                width: 2
+            }
+        },
+        hovertemplate: '<b>%{text}</b><br>' +
+                      'Crude RR: %{x:.2f}<br>' +
+                      '95% CI: [%{customdata[0]:.2f}, %{customdata[1]:.2f}]<br>' +
+                      '<extra></extra>',
+        text: variables,
+        customdata: crudeRR.map((rr, i) => [crudeLower[i], crudeUpper[i]])
+    };
+
+    // Adjusted RR trace  
+    const adjustedTrace = {
+        x: adjustedRR,
+        y: yValues.map(y => y + 0.1), // Slight offset for visibility
+        error_x: {
+            type: 'data',
+            symmetric: false,
+            array: adjustedUpper.map((u, i) => u - adjustedRR[i]),
+            arrayminus: adjustedRR.map((r, i) => r - adjustedLower[i])
+        },
+        mode: 'markers',
+        type: 'scatter',
+        name: 'Adjusted RR (95% CI)',
+        marker: {
+            color: '#11998e',
+            size: 10,
+            symbol: 'diamond',
+            line: {
+                color: '#0d7377',
+                width: 2
+            }
+        },
+        hovertemplate: '<b>%{text}</b><br>' +
+                      'Adjusted RR: %{x:.2f}<br>' +
+                      '95% CI: [%{customdata[0]:.2f}, %{customdata[1]:.2f}]<br>' +
+                      '<extra></extra>',
+        text: variables,
+        customdata: adjustedRR.map((rr, i) => [adjustedLower[i], adjustedUpper[i]])
+    };
+
+    const layout = {
+        title: {
+            text: 'Forest Plot: Crude and Adjusted Relative Risks for Screening Uptake',
+            font: {
+                size: 16,
+                color: '#2c3e50',
+                family: 'Inter, sans-serif'
+            }
+        },
+        xaxis: {
+            title: 'Relative Risk (RR)',
+            range: [0, 12],
+            gridcolor: 'rgba(200,200,200,0.3)',
+            showgrid: true,
+            zeroline: true,
+            zerolinecolor: 'rgba(200,200,200,0.8)',
+            zerolinewidth: 2,
+            font: {
+                size: 12,
+                color: '#2c3e50'
+            }
+        },
+        yaxis: {
+            title: '',
+            tickmode: 'array',
+            tickvals: yValues,
+            ticktext: variables,
+            showgrid: true,
+            gridcolor: 'rgba(200,200,200,0.2)',
+            font: {
+                size: 11,
+                color: '#2c3e50'
+            }
+        },
+        showlegend: true,
+        legend: {
+            x: 0.7,
+            y: 1,
+            bgcolor: 'rgba(255,255,255,0.8)',
+            bordercolor: 'rgba(0,0,0,0.1)',
+            borderwidth: 1,
+            font: {
+                size: 12,
+                color: '#2c3e50'
+            }
+        },
+        margin: {
+            l: 200,
+            r: 100,
+            t: 80,
+            b: 80
+        },
+        plot_bgcolor: 'rgba(248,249,250,0.5)',
+        paper_bgcolor: 'white',
+        shapes: [
+            // Reference line at RR = 1
+            {
+                type: 'line',
+                x0: 1,
+                x1: 1,
+                y0: -0.5,
+                y1: variables.length - 0.5,
+                line: {
+                    color: 'rgba(0,0,0,0.5)',
+                    width: 2,
+                    dash: 'dash'
+                }
+            }
+        ],
+        annotations: [
+            // Reference line annotation
+            {
+                x: 1.1,
+                y: variables.length - 1,
+                text: 'No Effect (RR = 1)',
+                showarrow: false,
+                font: {
+                    size: 10,
+                    color: '#666'
+                }
+            }
+        ]
+    };
+
+    const config = {
+        responsive: true,
+        displayModeBar: true,
+        modeBarButtonsToRemove: ['pan2d', 'lasso2d', 'autoScale2d'],
+        displaylogo: false,
+        toImageButtonOptions: {
+            format: 'png',
+            filename: 'forest_plot_relative_risks',
+            height: 600,
+            width: 1000,
+            scale: 2
+        }
+    };
+
+    Plotly.newPlot('forestPlot', [crudeTrace, adjustedTrace], layout, config);
+}
+
 // Export functions for potential external use
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
@@ -610,6 +814,7 @@ if (typeof module !== 'undefined' && module.exports) {
         createAwarenessChart,
         createRegressionChart,
         createBarriersChart,
-        createInstitutionChart
+        createInstitutionChart,
+        createForestPlot
     };
 }
