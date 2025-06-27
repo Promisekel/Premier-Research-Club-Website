@@ -220,14 +220,18 @@
                             
                             <!-- Bottom Stats -->
                             <div style="position: absolute; bottom: 15px; left: 15px; background: rgba(241, 196, 15, 0.95); padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; color: white; font-weight: 600; backdrop-filter: blur(10px);">
-                                Modified Poisson
-                            </div>
-                            
-                            <div style="position: absolute; bottom: 15px; right: 15px; background: rgba(155, 89, 182, 0.95); padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; color: white; font-weight: 600; backdrop-filter: blur(10px);">
-                                Ghana Study
+                                Poisson Regression
                             </div>
                             
                             <!-- Video Controls Toggle -->
+                            <button 
+                                onclick="toggleVideoSound(this)" 
+                                style="position: absolute; bottom: 15px; right: 15px; background: rgba(0,0,0,0.8); border: none; color: white; padding: 8px 12px; border-radius: 20px; cursor: pointer; font-size: 0.75rem; backdrop-filter: blur(10px); transition: all 0.3s ease;"
+                                title="Toggle Sound"
+                                onmouseover="this.style.background='rgba(0,0,0,0.9)'"
+                                onmouseout="this.style.background='rgba(0,0,0,0.8)'">
+                                🔇 Audio
+                            </button>
                             <button 
                                 onclick="toggleVideoSound(this)" 
                                 style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); border: none; color: white; padding: 8px 12px; border-radius: 20px; cursor: pointer; font-size: 0.8rem; backdrop-filter: blur(10px);"
@@ -698,11 +702,11 @@
             if (video) {
                 if (video.muted) {
                     video.muted = false;
-                    button.innerHTML = '🔊 Mute';
+                    button.innerHTML = '🔊 Audio';
                     button.title = 'Mute Video';
                 } else {
                     video.muted = true;
-                    button.innerHTML = '🔇 Unmute';
+                    button.innerHTML = '🔇 Audio';
                     button.title = 'Unmute Video';
                 }
             }
