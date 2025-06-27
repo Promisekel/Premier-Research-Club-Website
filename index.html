@@ -184,36 +184,56 @@
                 <!-- Cervical Cancer Screening Analytics Dashboard -->
                 <div class="project-card reveal-left">
                     <div class="project-image">
-                        <!-- Clean Medical Animation Container -->
-                        <div style="width: 100%; height: 200px; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                        <!-- Video Container -->
+                        <div style="width: 100%; height: 200px; position: relative; overflow: hidden; border-radius: 10px;">
                             
-                            <!-- Subtle Background Pattern -->
-                            <div style="position: absolute; width: 100%; height: 100%; background-image: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 2px, transparent 2px); background-size: 40px 40px; animation: slowMove 15s linear infinite;"></div>
+                            <!-- Video Element -->
+                            <video 
+                                autoplay 
+                                muted 
+                                loop 
+                                playsinline
+                                style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;"
+                                poster="assets/images/cervical-cancer-poster.jpg">
+                                <source src="https://github.com/Promisekel/Premier-Research-Club-Website/raw/master/assets/videos/CERVICAL%20CANCER%20VIDEO.mp4" type="video/mp4">
+                                <!-- Fallback for browsers that don't support video -->
+                                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); display: flex; align-items: center; justify-content: center; color: white;">
+                                    <div style="text-align: center;">
+                                        <div style="font-size: 2.5rem; margin-bottom: 8px;">🏥</div>
+                                        <div style="font-size: 1.1rem; font-weight: bold;">Cervical Cancer Screening</div>
+                                        <div style="font-size: 0.9rem; opacity: 0.9;">Analytics Dashboard</div>
+                                    </div>
+                                </div>
+                            </video>
                             
-                            <!-- Central Content -->
-                            <div style="text-align: center; z-index: 2; color: white;">
-                                <div style="font-size: 2.5rem; margin-bottom: 8px; animation: gentlePulse 3s ease-in-out infinite;">🏥</div>
-                                <div style="font-size: 1.1rem; font-weight: bold; margin-bottom: 5px;">Cervical Cancer Screening</div>
-                                <div style="font-size: 0.9rem; opacity: 0.9;">Analytics Dashboard</div>
-                            </div>
+                            <!-- Video Overlay with Stats -->
+                            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.2); pointer-events: none;"></div>
                             
                             <!-- Clean Stats Badges - Top Corners -->
-                            <div style="position: absolute; top: 15px; right: 15px; background: rgba(46, 204, 113, 0.95); padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; color: white; font-weight: 600; animation: gentleFade 4s ease-in-out infinite;">
+                            <div style="position: absolute; top: 15px; right: 15px; background: rgba(46, 204, 113, 0.95); padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; color: white; font-weight: 600; backdrop-filter: blur(10px);">
                                 354 Participants
                             </div>
                             
-                            <div style="position: absolute; top: 15px; left: 15px; background: rgba(52, 152, 219, 0.95); padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; color: white; font-weight: 600; animation: gentleFade 4s ease-in-out infinite reverse;">
+                            <div style="position: absolute; top: 15px; left: 15px; background: rgba(52, 152, 219, 0.95); padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; color: white; font-weight: 600; backdrop-filter: blur(10px);">
                                 13.6% Uptake
                             </div>
                             
                             <!-- Bottom Stats -->
-                            <div style="position: absolute; bottom: 15px; left: 15px; background: rgba(241, 196, 15, 0.95); padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; color: white; font-weight: 600; animation: gentleFade 4s ease-in-out infinite;">
+                            <div style="position: absolute; bottom: 15px; left: 15px; background: rgba(241, 196, 15, 0.95); padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; color: white; font-weight: 600; backdrop-filter: blur(10px);">
                                 Modified Poisson
                             </div>
                             
-                            <div style="position: absolute; bottom: 15px; right: 15px; background: rgba(155, 89, 182, 0.95); padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; color: white; font-weight: 600; animation: gentleFade 4s ease-in-out infinite reverse;">
+                            <div style="position: absolute; bottom: 15px; right: 15px; background: rgba(155, 89, 182, 0.95); padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; color: white; font-weight: 600; backdrop-filter: blur(10px);">
                                 Ghana Study
                             </div>
+                            
+                            <!-- Video Controls Toggle -->
+                            <button 
+                                onclick="toggleVideoSound(this)" 
+                                style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); border: none; color: white; padding: 8px 12px; border-radius: 20px; cursor: pointer; font-size: 0.8rem; backdrop-filter: blur(10px);"
+                                title="Toggle Sound">
+                                🔇 Unmute
+                            </button>
                         </div>
                         <div class="project-overlay">
                             <span class="project-status live">Research Active</span>
@@ -670,5 +690,41 @@
 
     <!-- JavaScript -->
     <script src="script.js"></script>
+    
+    <!-- Video Control Functions -->
+    <script>
+        function toggleVideoSound(button) {
+            const video = button.parentElement.querySelector('video');
+            if (video) {
+                if (video.muted) {
+                    video.muted = false;
+                    button.innerHTML = '🔊 Mute';
+                    button.title = 'Mute Video';
+                } else {
+                    video.muted = true;
+                    button.innerHTML = '🔇 Unmute';
+                    button.title = 'Unmute Video';
+                }
+            }
+        }
+        
+        // Handle video loading errors gracefully
+        document.addEventListener('DOMContentLoaded', function() {
+            const videos = document.querySelectorAll('video');
+            videos.forEach(video => {
+                video.addEventListener('error', function() {
+                    console.log('Video failed to load, showing fallback content');
+                    // The fallback content inside the video tag will automatically show
+                });
+                
+                // Ensure video plays on mobile devices
+                video.addEventListener('loadstart', function() {
+                    video.play().catch(e => {
+                        console.log('Autoplay prevented, user interaction required');
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
